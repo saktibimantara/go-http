@@ -99,6 +99,10 @@ func (g *GoHTTP) Request(url string, method string, body *Body) (*Response, erro
 		return nil, err
 	}
 
+	for key, value := range g.config.Header {
+		req.Header.Set(key, value)
+	}
+
 	resp, err := g.httpClient.Do(req)
 	if err != nil {
 		return nil, err
