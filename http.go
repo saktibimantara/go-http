@@ -49,8 +49,9 @@ type CallAPI interface {
 
 // Response callx model
 type Response struct {
-	Code int
-	Data []byte
+	Code   int
+	Data   []byte
+	Header http.Header
 }
 
 type GoHTTP struct {
@@ -116,8 +117,9 @@ func (g *GoHTTP) Request(url string, method string, body *Body) (*Response, erro
 	}
 
 	return &Response{
-		Code: resp.StatusCode,
-		Data: data,
+		Code:   resp.StatusCode,
+		Data:   data,
+		Header: resp.Header,
 	}, nil
 }
 
